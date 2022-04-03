@@ -1664,10 +1664,8 @@ EX3 &lt;- EM_Three_gaussian_f(Y=data$value,
                            p1=Iv$p1, mu1=Iv$mu1, sig1=sd(data$value)/3,
                            p2=Iv$p2, mu2=Iv$mu2, sig2=sd(data$value)/3, 
                            mu3=Iv$mu3, sig3=sd(data$value)/3, 
-                           eps=0.02, max_iter=1000, verbose=F) </code></pre>
-<pre><code>## 
-##  The EM converge at iteration 20</code></pre>
-<pre class="r"><code># Get the comparison data
+                           eps=0.02, max_iter=1000, verbose=F) 
+# Get the comparison data
 EX3_pij &lt;- as.data.frame(EX3$pij)
 EX3_comp_dat &lt;- create_comp_dat_3G_1D_f(data, EX3_pij)
 # png(&quot;./EX_Result/EX1_3G_1d_orgpre.png&quot;);
@@ -1679,6 +1677,8 @@ EX3_error &lt;- tabyl(EX3_comp_dat$err) %&gt;% mutate(error = `EX3_comp_dat$err`
 # get the parameter estimator
 EX3 &lt;- as.data.frame(EX3[c(2:10)]) 
 save(Tv, Iv, EX3, EX3_error, file= &quot;./EX_Result/EX3.RData&quot;)</code></pre>
+<pre><code>  
+   The EM converge at iteration 20</code></pre>
 </div>
 <div id="if-we-choose-a-wrong-number-of-clusters" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> If we choose a wrong number of clusters</h2>
@@ -1697,15 +1697,15 @@ EX3_2_comdat &lt;- cbind(data, U_vec) %&gt;%
    mutate(dist = as.numeric(dist)) %&gt;% 
    mutate(err= dist-U_vec)
 EX3_2_comdat_err &lt;- tabyl(EX3_2_comdat$err)
-EX3_2</code></pre>
-<pre><code>##   i   p      mu1     sig1      mu2     sig2
-## 1 4 0.5 49.94347 3.073976 82.99561 4.113227</code></pre>
-<pre class="r"><code>EX3_2_comdat_err</code></pre>
-<pre><code>##  EX3_2_comdat$err   n percent
-##                 0 700     0.7
-##                 1 300     0.3</code></pre>
-<pre class="r"><code># write_rds(EX3_2, &quot;./EX_Result/EX3_2.rds&quot;)
+EX3_2
+EX3_2_comdat_err
+# write_rds(EX3_2, &quot;./EX_Result/EX3_2.rds&quot;)
 # write_rds(EX3_2_comdat_err, &quot;./EX_Result/EX3_2_comdat_err.rds&quot;)</code></pre>
+<pre><code>    i   p      mu1     sig1      mu2     sig2
+  1 4 0.5 49.94347 3.073976 82.99561 4.113227
+   EX3_2_comdat$err   n percent
+                  0 700     0.7
+                  1 300     0.3</code></pre>
 <pre class="r"><code>plot_org_pre_wrongk_dat_f &lt;- function(comp_dat){
    # Plot the original +  predicted data gotten from EM algorithm 
    # when we choose a WRONG number of cluster
